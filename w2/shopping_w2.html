@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <title>He.nique</title>
+
+    <style>
+
+      img {
+        display: block; margin: 30px auto;
+      }
+
+      .title {
+        margin-top: 20px;
+        margin-left: 20px;
+      }
+
+      .description {
+        text-align: center;
+        margin: 30px auto;
+      }
+
+      .order {
+        margin-top: 100px;
+        margin-left: 150px;
+        margin-right: 150px;
+        margin-bottom: 100px;
+      }
+
+      .order button {
+        margin: auto;
+
+      }
+
+      .orderTable {
+        margin-left: 150px;
+        margin-right: 150px;
+        margin-bottom: 150px;
+      }
+
+    </style>
+
+    <script>
+
+    $(document).ready(function(){
+      $('#order-list').html('');
+      orderList();
+    });
+
+    function orderList() {
+      $.ajax({
+        type: "GET",
+        url: "http://spartacodingclub.shop/order",
+        data: {},
+        success: function(response){
+          let orders = response['orders'];
+          for (let i = 0 ; i < orders.length ; i++){
+            makeList(i+1, orders[i]["name"], orders[i]["count"], orders[i]["address"], orders[i]["phone"] )
+          }
+        }
+      })
+    }
+
+    function makeList(order_num, order_name, order_amount, order_address, order_phone) {
+      let temp_html =
+        '<tr>\
+          <td>'+order_num+'</td>\
+          <td>'+order_name+'</td>\
+          <td>'+order_amount+'</td>\
+          <td>'+order_address+'</td>\
+          <td>'+order_phone+'</td>\
+        </tr>';
+      $('#order-list').append(temp_html);
+    }
+
+
+    </script>
+
+  </head>
+
+
+  <body>
+    <div class="title">
+      <h1><b>He.nique</b></h1>
+    </div>
+    <img src="http://henique.co.kr/web/product/big/201809/343efcce6fad88f90d02f86bab34bffb.jpg" alt="My Image" width=400 height=400>
+    <div class="description">
+      <h3>그날의 감정 <b>니트 가디건</b> 티셔츠 (블랙/브라운/베이지)</h3>
+      <p>페미닌한 실루엣을 연출해 줄 니트 티셔츠 소개해드려요!<br>
+        부드러운 니트 소재로 겨울 가을 이너템으로 딱인! 적당한 두께감으로 생각보다 얇지 않아 포근하기까지!<br>
+        청바지 스커트 어디든 잘어울리는 데일리 아이템이랍니다!<br>
+        브이넥으로 얼굴형도 갸름해보이구요. 버튼 디테일도 니트랑 같은 칼라로 더욱 매력적이랍니다!
+      </p>
+    </div>
+    <div class="order">
+      <h5><b>주문하기</b></h5><br>
+      <form>
+        <div class="form-group">
+          <label for="orderName">주문자 성함</label>
+          <input type="name" class="form-control" id="orderName" placeholder="성함을 입력해주세요.">
+        </div>
+        <div class="form-group">
+          <label for="orderAmount">수량</label>
+          <select class="form-control" id="orderAmount">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="orderAddress">주소</label>
+          <input type="address" class="form-control" id="orderAddress" placeholder="주소를 입력해주세요.">
+        </div>
+        <div class="form-group">
+          <label for="orderContact">연락처</label>
+          <input type="contact" class="form-control" id="orderContact" placeholder="전화번호를 입력해주세요.">
+        </div><br>
+        <button type="submit" class="btn btn-primary">주문하기</button>
+      </form>
+    </div>
+
+    <div class="orderTable">
+      <h5><b>주문내역</b></h5><br>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">주문번호</th>
+            <th scope="col">주문자 성함</th>
+            <th scope="col">주문 수량</th>
+            <th scope="col">주문자 주소</th>
+            <th scope="col">주문자 연락처</th>
+          </tr>
+        </thead>
+        <tbody class="orders" id="order-list">
+          <tr>
+            <th scope="row">번호</th>
+            <td>이름</td>
+            <td>수량</td>
+            <td>주소</td>
+            <td>전화번호</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </body>
+</html>
