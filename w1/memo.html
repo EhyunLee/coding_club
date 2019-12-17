@@ -55,10 +55,29 @@
 			listing();
 		});
 
+		function posting() {
+			// 입력칸의 url 과 comment 가져오기
+			let url = $('#exampleInputEmail1').val();
+			let comment = $('#exampleInputPassword1').val();
+
+			$.ajax({
+				type: "POST",
+				url: "/post",
+				data: {url_give : url, comment_give : comment},
+				success: function(response){
+					if response['result'] == 'success'{
+						location.reload()
+					} else {
+						alert("잘못된 요청입니다.")
+					}
+				}
+			})
+		}
+
 		function listing() {
 			$.ajax({
 				type: "GET",
-				url: "http://spartacodingclub.shop/post",
+				url: "/post",
 				data: {},
 				success: function(response){
 					let articles = response['articles'];
@@ -89,18 +108,19 @@
 			<hr class="my-4">
 			<p class="lead">
 				<a onclick="hey()" class="btn btn-primary btn-lg" href="#" role="button">포스팅 박스 열기</a>
+				<a onclick="listing()" class="btn btn-primary btn-lg" role="button">아티클 불러오기</a>
 			</p>
 		</div>
     <div class="posting-box">
       <div class="form-group">
         <label for="exampleInputEmail1">아티클 URL</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
+        <input type="url" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">간단 코멘트</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="">
       </div>
-      <button class="btn btn-primary">기사 저장</button>
+      <button onclick="posting()" class="btn btn-primary">기사 저장</button>
     </div>
 
 		<div class="card-columns" id="cards-box">
