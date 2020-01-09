@@ -1,35 +1,6 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% extends 'layout.html' %}
+{% block content %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-
-    <title>Welcome to LINK Cinema</title>
-
-  <style type="text/css">
-    #mainTitle {
-      margin : 30px;
-      color : black;
-    }
-
-    #cards-box {
-      margin : auto;
-    }
-  </style>
-
-  </head>
-
-  <body>
     <!--script-->
     <script>
     $(document).ready(function(){
@@ -74,68 +45,18 @@
           <h6 class="card-subtitle mb-2 text-muted" style="text-align: center">'+ age +'</h6>\
           <p class="card-text">'+ description +'</p>\
           <a href="#" class="card-link">See Details</a>\
-          <a href="#" class="card-link">Get Tickets</a>\
+          <a href="/ticket" class="card-link">Get Tickets</a>\
         </div>';
       $('#cards-container-row').append(temp_card);
     }
 
     </script>
 
-
-
-
-    <!-- Navigation Menu -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">LINK Cinema</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar" aria-controls="topNavbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="top-navbar" id="topNavbar" style="color:red">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#" >Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Bottom Navbar-->
-    <ul class="nav justify-content-center">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">See A Movie</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Our Theaters</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Food & Drinks</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Events</a>
-      </li>
-    </ul>
-
     <div class="page-title" id="mainTitle">
       <h3>Now Playing</h3>
       <button type="button" onclick="makeList()">리스트 불러오기</button>
       <hr color="black">
     </div>
-
 
     <!-- Movie Card List-->
     <div class="container" id="cards-container">
@@ -148,13 +69,11 @@
               <h6 class="card-subtitle mb-2 text-muted" style="text-align: center">Card subtitle</h6>
               <p class="card-text">The story of Frozen 2 delves deeper into Elsa's powers.</p>
               <a href="#" class="card-link">See Details</a>
-              <a href="#" class="card-link">Get Tickets</a>
+              <a href="/ticket" class="card-link">Get Tickets</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-
-  </body>
-</html>
+{% endblock %}

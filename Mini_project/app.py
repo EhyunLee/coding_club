@@ -1,4 +1,5 @@
 import requests
+import datetime
 from bs4 import BeautifulSoup
 
 import json
@@ -12,14 +13,20 @@ db = client.linkcinema
 
 ## HTML을 주는 부분
 @app.route('/')
-def home():
+def index():
    return render_template('index.html')
+
+
+@app.route('/ticket')
+def getTicket():
+   return render_template('ticket.html')
 
 
 @app.route('/movieList', methods=['POST'])
 def post_now_showing():
 
    # movieGlu 의 GET filmsNowShowing 받기
+   # datetime = datetime.datetime.now().isoformat()
    url = "https://api-gate2.movieglu.com/filmsNowShowing/?n=10"
    apikey = "1S4l9ifKks9mCX4AxGTVm9Q6SszGA9YU4Iiv3P9j"
    geolocation = "51.510408;-0.130105"
@@ -30,7 +37,7 @@ def post_now_showing():
              "api-version" : "v200",
              "geolocation" : geolocation,
              "territory" : "US",
-             "device-datetime" : "2018-09-14T08:30:17.360Z"}
+             "device-datetime" : "2020-01-08T08:30:17.360Z"}
    movieList = requests.get(url, headers= params).json()
    movies = movieList["films"]
    # print(movies)
